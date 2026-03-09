@@ -7,4 +7,5 @@ public class PalindromeCheckerApp {
         System.out.println("Version: 1.0");
 
     }
+}
 
