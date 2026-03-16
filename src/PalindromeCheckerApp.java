@@ -2,26 +2,46 @@ public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        // Original input string
-        String input = "A man a plan a canal Panama";
+        // Input string
+        String input = "level";
 
-        // Normalize the string
-        String normalized = input.replaceAll("[^a-zA-Z]", "").toLowerCase();
+        // Create object of service class
+        PalindromeService service = new PalindromeService();
 
-        boolean isPalindrome = true;
+        // Call palindrome check method
+        boolean result = service.checkPalindrome(input);
 
-        // Compare characters from both ends
-        for (int i = 0; i < normalized.length() / 2; i++) {
+        // Display result
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+}
 
-            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
+/**
+ * Service class that contains palindrome logic
+ */
+class PalindromeService {
+
+    /**
+     * Checks whether the input string is a palindrome
+     */
+    public boolean checkPalindrome(String input) {
+
+        // Initialize pointers
+        int start = 0;
+        int end = input.length() - 1;
+
+        // Compare characters moving inward
+        while (start < end) {
+
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
             }
+
+            start++;
+            end--;
         }
 
-        // Display results
-        System.out.println("Input : " + input);
-        System.out.println("Normalized : " + normalized);
-        System.out.println("Is Palindrome? : " + isPalindrome);
+        return true;
     }
 }
