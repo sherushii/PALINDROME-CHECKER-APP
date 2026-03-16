@@ -2,36 +2,54 @@ public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        // Input string
         String input = "level";
 
-        // Create object of service class
-        PalindromeService service = new PalindromeService();
+        // Create strategies
+        PalindromeStrategy reverseStrategy = new ReverseStrategy();
+        PalindromeStrategy twoPointerStrategy = new TwoPointerStrategy();
 
-        // Call palindrome check method
-        boolean result = service.checkPalindrome(input);
-
-        // Display result
+        // Execute strategies
         System.out.println("Input : " + input);
-        System.out.println("Is Palindrome? : " + result);
+
+        System.out.println("Reverse Strategy Result : " +
+                reverseStrategy.checkPalindrome(input));
+
+        System.out.println("Two Pointer Strategy Result : " +
+                twoPointerStrategy.checkPalindrome(input));
     }
 }
 
 /**
- * Service class that contains palindrome logic
+ * Strategy Interface
+ * Defines common method for palindrome algorithms
  */
-class PalindromeService {
+interface PalindromeStrategy {
+    boolean checkPalindrome(String input);
+}
 
-    /**
-     * Checks whether the input string is a palindrome
-     */
+/**
+ * Strategy 1: Reverse String Method
+ */
+class ReverseStrategy implements PalindromeStrategy {
+
     public boolean checkPalindrome(String input) {
 
-        // Initialize pointers
+        String reversed = new StringBuilder(input).reverse().toString();
+
+        return input.equals(reversed);
+    }
+}
+
+/**
+ * Strategy 2: Two Pointer Method
+ */
+class TwoPointerStrategy implements PalindromeStrategy {
+
+    public boolean checkPalindrome(String input) {
+
         int start = 0;
         int end = input.length() - 1;
 
-        // Compare characters moving inward
         while (start < end) {
 
             if (input.charAt(start) != input.charAt(end)) {
