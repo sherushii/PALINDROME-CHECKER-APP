@@ -4,48 +4,26 @@ public class PalindromeCheckerApp {
 
         String input = "level";
 
-        // Create strategies
-        PalindromeStrategy reverseStrategy = new ReverseStrategy();
-        PalindromeStrategy twoPointerStrategy = new TwoPointerStrategy();
+        // Record start time
+        long startTime = System.nanoTime();
 
-        // Execute strategies
+        // Palindrome check using two-pointer method
+        boolean isPalindrome = checkPalindrome(input);
+
+        // Record end time
+        long endTime = System.nanoTime();
+
+        // Calculate execution time
+        long executionTime = endTime - startTime;
+
+        // Display results
         System.out.println("Input : " + input);
-
-        System.out.println("Reverse Strategy Result : " +
-                reverseStrategy.checkPalindrome(input));
-
-        System.out.println("Two Pointer Strategy Result : " +
-                twoPointerStrategy.checkPalindrome(input));
+        System.out.println("Is Palindrome? : " + isPalindrome);
+        System.out.println("Execution Time : " + executionTime + " ns");
     }
-}
 
-/**
- * Strategy Interface
- * Defines common method for palindrome algorithms
- */
-interface PalindromeStrategy {
-    boolean checkPalindrome(String input);
-}
-
-/**
- * Strategy 1: Reverse String Method
- */
-class ReverseStrategy implements PalindromeStrategy {
-
-    public boolean checkPalindrome(String input) {
-
-        String reversed = new StringBuilder(input).reverse().toString();
-
-        return input.equals(reversed);
-    }
-}
-
-/**
- * Strategy 2: Two Pointer Method
- */
-class TwoPointerStrategy implements PalindromeStrategy {
-
-    public boolean checkPalindrome(String input) {
+    // Palindrome checking logic
+    public static boolean checkPalindrome(String input) {
 
         int start = 0;
         int end = input.length() - 1;
